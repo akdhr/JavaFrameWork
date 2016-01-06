@@ -36,7 +36,7 @@
 				<configuration>
 					<url>http://localhost:8080/manager/text</url>
 					<server>tomcat</server> <!-- 此处的名字必须和setting.xml中配置的ID一致 -->
-					<path>/Test</path> <!-- 此处的名字是项目发布的工程名 -->
+					<path>/JavaFrameWork</path> <!-- 此处的名字是项目发布的工程名 -->
 				</configuration>
 			</plugin>
 		</plugins>
