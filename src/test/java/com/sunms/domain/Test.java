@@ -18,6 +18,7 @@ public class Test {
 			SqlSession sqlSession = factory.openSession();
 			String statement = "com.sunms.mappers.user.getUser";
 			User user = sqlSession.selectOne(statement, 1);
+//			sqlSession.getMapper(arg0)
 			System.out.println(user);
 
 		} catch (IOException e) {

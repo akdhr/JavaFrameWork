@@ -24,6 +24,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.34</version>
 		</dependency>
+		
   </dependencies>
   <build>
     <finalName>JavaFrameWork</finalName>
@@ -31,13 +32,17 @@
     <plugins>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
+				<artifactId>tomcat7-maven-plugin</artifactId> <!-- 命令为tomcat7:redeploy -->
 				<version>2.1</version>
 				<configuration>
-					<url>http://localhost:8080/manager/text</url>
+					<url>http://localhost:8080/manager/text</url><!-- tomcat7部署管理路径 -->
 					<server>tomcat</server> <!-- 此处的名字必须和setting.xml中配置的ID一致 -->
+					<username>admin</username>
+					<password>admin</password>
+					<port>8080</port>
+					<charset>UTF-8</charset>
 					<path>/JavaFrameWork</path> <!-- 此处的名字是项目发布的工程名 -->
-				</configuration>
+				</configuration><!-- 运行redeploy命令前，要能正常访问http://localhost:8080/manager-->
 			</plugin>
 		</plugins>
   </build>
