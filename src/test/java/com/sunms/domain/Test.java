@@ -2,6 +2,7 @@ package com.sunms.domain;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -18,9 +19,12 @@ public class Test {
 			SqlSession sqlSession = factory.openSession();
 			String statement = "com.sunms.mappers.user.getUser";
 			User user = sqlSession.selectOne(statement, 1);
-//			sqlSession.getMapper(arg0)
+			// sqlSession.getMapper(arg0)
 			System.out.println(user);
-
+			System.out.println("---------------");
+			statement = "com.sunms.mappers.user.selectAll";
+			List<User> list = sqlSession.selectList(statement);
+			System.out.println(list);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

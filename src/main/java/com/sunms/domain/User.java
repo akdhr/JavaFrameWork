@@ -1,5 +1,9 @@
 package com.sunms.domain;
 
+/**用户表
+ * @author Sunms
+ *
+ */
 public class User {
 
 	private int id;
