@@ -8,9 +8,9 @@
 		select * from users where id=#{id}
 	</select>
 
-	<insert id="insertUser" parameterType="com.sunms.domain.User" keyColumn="id" useGeneratedKeys="true">
+	<insert id="insertUser" parameterType="com.sunms.domain.User">
 		insert into
-		users(id,name,age)values(#{id},#{name},#{age})
+		users(name,age)values(#{name},#{age})
 	</insert>
 
 	<delete id="delete" parameterType="int">
@@ -27,6 +27,6 @@
 		select * from users
 	</select>
 
-	
+
 
 </mapper>
