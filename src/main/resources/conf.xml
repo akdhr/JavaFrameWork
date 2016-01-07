@@ -21,6 +21,7 @@
 	</environments>
 	<mappers>
 		<mapper resource="com/sunms/mappers/user.xml" />
+		<!--<package name="com/sunms/mappers"/> 包扫描  需要spring的支持 -->
 		<!-- 另外一种是通过注解的方式实现，编写接口文件，加上注解文件实现 -->
 	</mappers>
 </configuration>
