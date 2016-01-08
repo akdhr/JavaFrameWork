@@ -47,6 +47,9 @@
 		call addper2(#{age,mode=IN,jdbcType=INTEGER},#{name,mode=OUT,jdbcType=VARCHAR});
 	</select>
 	
-	
+	<!-- procedure return table --> 
+	<select id="selectusers" statementType="CALLABLE" useCache="false" parameterType="java.util.Map" resultType="User">
+		call selectusers()
+	</select>
 
 </mapper>

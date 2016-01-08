@@ -3,6 +3,7 @@ package com.sunms.domain;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
@@ -36,11 +37,11 @@ public class Test {
 			 * System.out.println(param.get("thesums"));
 			 */
 
-			String statement = "com.sunms.mappers.user.getNames";
+			/*String statement = "com.sunms.mappers.user.getNames";
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("age", 23);
 			sqlSession.selectOne(statement, param);
-			System.out.println(param.get("name"));
+			System.out.println(param.get("name"));*/
 
 			/*
 			 * Map<String, Object> param2 = new HashMap<String, Object>();
@@ -57,6 +58,10 @@ public class Test {
 			 * System.out.println(param.get("thesum"));
 			 */
 
+			String statement = "com.sunms.mappers.user.selectusers";
+			List<User> list = sqlSession.selectList(statement);
+			System.out.println(list==null?-1:list.size());
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
