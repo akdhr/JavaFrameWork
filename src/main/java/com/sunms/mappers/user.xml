@@ -27,5 +27,26 @@
 		select * from users
 	</select>
 
+	<!-- mybatis存储过程测试 -->
+	<parameterMap type="java.util.Map" id="testparametermap">
+		<parameter property="add1" mode="IN" jdbcType="INTEGER" />
+		<parameter property="add2" mode="IN" jdbcType="INTEGER" />
+		<parameter property="thesums" mode="OUT" jdbcType="INTEGER" />
+	</parameterMap>
+
+	<select id="addper" statementType="CALLABLE" parameterMap="testparametermap" useCache="false">
+		call addper(?,?,?)
+	</select>
+
+	<select id="addper2" statementType="CALLABLE" parameterType="java.util.Map" useCache="false">
+		call
+		addper(#{add1,mode=IN,jdbcType=INTEGER},#{add2,mode=IN,jdbcType=INTEGER},#{thesum,mode=OUT,jdbcType=INTEGER})
+	</select>
+
+	<select id="getNames" statementType="CALLABLE" parameterType="java.util.Map" useCache="false">
+		call addper2(#{age,mode=IN,jdbcType=INTEGER},#{name,mode=OUT,jdbcType=VARCHAR});
+	</select>
+	
+	
 
 </mapper>

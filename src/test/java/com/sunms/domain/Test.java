@@ -2,7 +2,8 @@ package com.sunms.domain;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -17,27 +18,45 @@ public class Test {
 			Reader reader = Resources.getResourceAsReader(resource);
 			SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader);
 			SqlSession sqlSession = factory.openSession();
-			String statement = "com.sunms.mappers.user.getUser";
-			User user = sqlSession.selectOne(statement, 1);
-			// sqlSession.getMapper(arg0)
-			System.out.println(user);
-			System.out.println("---------------");
-			/*statement = "com.sunms.mappers.user.insertUser";
-			User user2 = new User();
-			user2.setName("warboy");
-			user2.setAge(26);
-			sqlSession.insert(statement, user2);
-			System.out.println("---------------");
-			statement = "com.sunms.mappers.user.insertUser";
-			User user3 = new User();
-			user3.setName("sjtu");
-			user3.setAge(27);
-			sqlSession.insert(statement, user3);
-			System.out.println("---------------");*/
-			statement = "com.sunms.mappers.user.selectAll";
-			List<User> list = sqlSession.selectList(statement);
-			System.out.println(list);
-			
+			// not work
+			/*
+			 * String statement = "com.sunms.mappers.user.addper2"; Map<String,
+			 * Integer> param = new HashMap<String, Integer>();
+			 * param.put("add1", 5); param.put("add2", 6);
+			 * sqlSession.selectOne(statement, param);
+			 * System.out.println(param.get("thesum"));
+			 */
+
+			// work
+			/*
+			 * String statement = "com.sunms.mappers.user.addper"; Map<String,
+			 * Integer> param = new HashMap<String, Integer>();
+			 * param.put("add1", 2); param.put("add2", 7);
+			 * sqlSession.selectOne(statement, param);
+			 * System.out.println(param.get("thesums"));
+			 */
+
+			String statement = "com.sunms.mappers.user.getNames";
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("age", 23);
+			sqlSession.selectOne(statement, param);
+			System.out.println(param.get("name"));
+
+			/*
+			 * Map<String, Object> param2 = new HashMap<String, Object>();
+			 * param2.put("age", 23); String statement =
+			 * "com.sunms.mappers.user.getNames";
+			 * sqlSession.selectOne(statement, param2);
+			 * System.out.println(param2.get("name"));
+			 */
+
+			/*
+			 * Map<String, Integer> param = new HashMap<String, Integer>();
+			 * param.put("add1", 4); param.put("add2", 7);
+			 * sqlSession.selectOne(statement, param);
+			 * System.out.println(param.get("thesum"));
+			 */
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
