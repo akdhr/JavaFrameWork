@@ -46,7 +46,7 @@
 			当然方法名字也是要对应的了 -->
 		<!-- <property name="sqlSessionFactoryBeanName" ref="sqlSessionFactory" /> --><!-- 约定优与配置 如果你只有一个数据源不需要切换数据源 就不用配置这个选项 默认是sqlSessionFactory -->
 	</bean>
-	<!-- SqlSessionTemplate方式 这样的话要写daoImpl类了 但它是线程安全的，可以被多个Dao同时使用    好像不配置也可以。。。-->
+	<!-- SqlSessionTemplate方式 这样的话要写daoImpl类了 但它是线程安全的，可以被多个Dao同时使用    好像不配置也可以。。。应该是约定优于配置的原因吧-->
 	<!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
        <constructor-arg index="0" ref="sqlSessionFactory" />
     </bean> -->
