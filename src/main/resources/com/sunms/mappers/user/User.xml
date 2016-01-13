@@ -4,7 +4,7 @@
 
 	<cache type="PERPETUAL" eviction="LRU" size="512" flushInterval="60000" />
 
-	<select id="getUser" parameterType="int" resultType="User">
+	<select id="getUser" parameterType="int" resultType="com.sunms.domain.User">
 		select * from users where id=#{id}
 	</select>
 
