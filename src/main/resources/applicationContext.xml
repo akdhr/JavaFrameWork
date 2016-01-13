@@ -39,12 +39,16 @@
 	<!-- 配置好数据源之后 最重要的就是怎么获取sqlSesseion对象或者说获得mapper对象了(如果没有mybatis或相关持久层框架基础的话，请自行补习) -->
 	<!-- mybatis-spring包提供了三种或者说两种方式供你选择 一种是MapperFactoryBean(有两种配置方式 这里只说明自动扫描的情况 因为在实际项目中那么多mapper文件一个一个的注册 真是没有什么意思 要把精力集中在核心业务上面 
 		而不是这些杂七杂八的配置上面) 一种是SqlSessionTemplate -->
-	<!-- org.mybatis.spring.mapper.MapperScannerConfigurer方式 -->
+	<!-- org.mybatis.spring.mapper.MapperScannerConfigurer方式    也就是直接用获取到的mapper对象操作  -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.sunms.dao" /><!-- 必须要指定。这里需要注意，dao包下面的各种dao文件是些interface接口，他是怎么找到对应的mapper文件的呢， 
 			其实很简单。第一种情况就是你配置好，谁匹配谁。这样的话哪怕接口叫a.java.映射文件叫b.xml那它也能找到。第二种就是你没告诉他，哪个接口匹配哪个映射文件， 那就要采取默认情况怎么匹配，就是mapper.xml文件的namespace对应dao的全限定类名 
 			当然方法名字也是要对应的了 -->
 		<!-- <property name="sqlSessionFactoryBeanName" ref="sqlSessionFactory" /> --><!-- 约定优与配置 如果你只有一个数据源不需要切换数据源 就不用配置这个选项 默认是sqlSessionFactory -->
 	</bean>
-
+	<!-- SqlSessionTemplate方式 这样的话要写daoImpl类了 但它是线程安全的，可以被多个Dao同时使用    好像不配置也可以。。。-->
+	<!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+       <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean> -->
+	
 </beans>

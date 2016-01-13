@@ -1,4 +1,4 @@
-package com.sunms.dao.user;
+package com.sunms.dao.userDao;
 
 import java.util.List;
 
