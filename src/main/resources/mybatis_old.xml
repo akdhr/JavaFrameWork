@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- mybatis 与spring整合之后就可以不用单独配置mybatis了 由spring接管 -->
 <configuration>
 	<properties resource="db.properties" /><!-- 可指定resource属性 resource指向*.properties文件，如果其中有属性跟property指定的属性同名，则覆盖 -->
-
 	<typeAliases>
 		<!--<typeAlias alias="user.xml" type="com/sunms/mappers/user.xml" /> typeAlias只能配置java类型 -->
 		<!-- <typeAlias type="com.sunms.domain.User" alias="User" /> -->
@@ -21,7 +21,8 @@
 	</environments>
 	<mappers>
 		<mapper resource="com/sunms/mappers/user.xml" />
-		<!--<package name="com/sunms/mappers"/> 包扫描  需要spring的支持 -->
+		<!--<package name="com/sunms/mappers"/> 包扫描 需要spring的支持 -->
 		<!-- 另外一种是通过注解的方式实现，编写接口文件，加上注解文件实现 -->
+
 	</mappers>
 </configuration>

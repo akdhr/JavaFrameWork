@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+     http://www.springframework.org/schema/context  
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+     http://www.springframework.org/schema/mvc  
+     http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<context:property-placeholder location="classpath:db.properties" /><!-- 
+		引入db.properties文件 -->
+	<context:component-scan base-package="com.sunms.service" /><!-- 包扫描 这样就可以不用一个一个的注册springbean了 
+		但是要用注解标示出spring bean -->
+	<!-- 配置数据源 整合后有spring接管 最好配置线程池，例如阿里巴巴提供的druid连接池 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${driverClassName}" />
+		<property name="url" value="${jdbc_url}" />
+		<property name="username" value="${jdbc_username}" />
+		<property name="password" value="${jdbc_password}" />
+	</bean>
+
+	<!-- sqlSessionFactory由mybatis-spring包提供 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" /><!-- 必须指定的属性 -->
+		<property name="mapperLocations" value="classpath:/com/sunms/*/" /><!-- mapper文件存放的位置 这样就不用在mybatis配置文件中注册mapper文件了 -->
+		<property name="typeAliasesPackage" value="com.sunms" /><!-- 给类取别名，默认为非限定类名，就是类名 -->
+		<!-- <property name="configLocation" value="classpath:mybatis_old.xml"/>指定mybatis的配置文件 spring与mybatis整合后可以做到没有mybatis单独的配置文件 -->
+	</bean>
+	<!-- 配置好数据源之后 最重要的就是怎么获取sqlSesseion对象或者说获得mapper对象了(如果没有mybatis或相关持久层框架基础的话，请自行补习) -->
+	<!-- mybatis-spring包提供了三种或者说两种方式供你选择 一种是MapperFactoryBean(有两种配置方式 这里只说明自动扫描的情况 因为在实际项目中那么多mapper文件一个一个的注册 
+		真是没有什么意思 要把精力集中在核心业务上面 而不是这些杂七杂八的配置上面) 一种是SqlSessionTemplate -->
+	<!-- org.mybatis.spring.mapper.MapperScannerConfigurer方式 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.sunms.dao" /><!-- 必须要指定。这里需要注意，dao包下面的各种dao文件是些interface接口，他是怎么找到对应的mapper文件的呢，
+		其实很简单。第一种情况就是你配置好，谁匹配谁。这样的话哪怕接口叫a.java.映射文件叫b.xml那它也能找到。第二种就是你没告诉他，哪个接口匹配哪个映射文件，
+		那就要采取默认情况怎么匹配，就是mapper.xml文件的namespace对应dao的全限定类名  当然方法名字也是要对应的了 -->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" /><!-- 约定优与配置 如果你只有一个数据源不需要切换数据源   就不用配置这个选项
+			默认是sqlSessionFactory -->
+	</bean>
+
+</beans>
