@@ -1,4 +1,4 @@
-package com.sunms.service.user.service;
+package com.sunms.service.userService;
 
 import com.sunms.domain.User;
 

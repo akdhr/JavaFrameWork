@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.sunms.dao.userDao.UserDao;
 import com.sunms.domain.User;
-import com.sunms.service.user.service.UserService;
+import com.sunms.service.userService.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")

@@ -8,9 +8,10 @@
      http://www.springframework.org/schema/mvc  
      http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-	<context:property-placeholder location="classpath:db.properties" /><!-- 引入db.properties文件 -->
-	<context:component-scan base-package="com.sunms.service" /><!-- 包扫描 这样就可以不用一个一个的注册springbean了 但是要用注解标示出spring 
-		bean -->
+	<context:property-placeholder location="classpath:db.properties" /><!-- 
+		引入db.properties文件 -->
+	<context:component-scan base-package="com.sunms.service,com.sunms.dao,com.sunms.domain" /><!-- 
+		包扫描 这样就可以不用一个一个的注册springbean了 但是要用注解标示出spring bean -->
 	<!-- 配置数据源 整合后有spring接管 最好配置线程池，例如阿里巴巴提供的druid连接池 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${driverClassName}" />
@@ -23,15 +24,16 @@
 	<!-- sqlSessionFactory由mybatis-spring包提供 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" /><!-- 必须指定的属性 -->
-		<property name="mapperLocations" value="classpath*:com/sunms/mappers/**/*.xml" /><!-- mapper文件存放的位置 这样就不用在mybatis配置文件中注册mapper文件了 -->
+		<property name="mapperLocations" value="classpath*:com/sunms/mappers/**/*.xml" /><!-- mapper文件存放的位置 
+			这样就不用在mybatis配置文件中注册mapper文件了 -->
 		<property name="typeAliasesPackage" value="com.sunms.domain" /> <!-- 给类取别名，默认为非限定类名，就是类名 -->
 		<!-- <property name="configLocation" value="classpath:mybatis_old.xml" /> --><!-- 指定mybatis的配置文件 spring与mybatis整合后可以做到没有mybatis单独的配置文件 -->
 	</bean>
 
 
 	<!-- 配置好数据源之后 最重要的就是怎么获取sqlSesseion对象或者说获得mapper对象了(如果没有mybatis或相关持久层框架基础的话，请自行补习) -->
-	<!-- mybatis-spring包提供了三种或者说两种方式供你选择 一种是MapperFactoryBean(有两种配置方式 这里只说明自动扫描的情况 因为在实际项目中那么多mapper文件一个一个的注册 真是没有什么意思 要把精力集中在核心业务上面 
-		而不是这些杂七杂八的配置上面) 一种是SqlSessionTemplate -->
+	<!-- mybatis-spring包提供了三种或者说两种方式供你选择 一种是MapperFactoryBean(有两种配置方式 这里只说明自动扫描的情况 因为在实际项目中那么多mapper文件一个一个的注册 
+		真是没有什么意思 要把精力集中在核心业务上面 而不是这些杂七杂八的配置上面) 一种是SqlSessionTemplate -->
 	<!-- org.mybatis.spring.mapper.MapperScannerConfigurer方式 也就是直接用获取到的mapper对象操作 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.sunms.dao" /><!-- 必须要指定。这里需要注意，dao包下面的各种dao文件是些interface接口，他是怎么找到对应的mapper文件的呢， 
@@ -39,9 +41,10 @@
 			当然方法名字也是要对应的了 -->
 		<!-- <property name="sqlSessionFactoryBeanName" ref="sqlSessionFactory" /> --><!-- 约定优与配置 如果你只有一个数据源不需要切换数据源 就不用配置这个选项 默认是sqlSessionFactory -->
 	</bean>
-	<!-- SqlSessionTemplate方式 这样的话要写daoImpl类了 但它是线程安全的，可以被多个Dao同时使用 好像不配置也可以。。。应该是约定优于配置的原因吧 -->
-	<!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"> <constructor-arg index="0" ref="sqlSessionFactory" 
-		/> </bean> -->
+	<!-- SqlSessionTemplate方式 这样的话要写daoImpl类了 但它是线程安全的，可以被多个Dao同时使用 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>

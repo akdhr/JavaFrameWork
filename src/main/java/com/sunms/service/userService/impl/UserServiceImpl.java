@@ -1,11 +1,11 @@
-package com.sunms.service.user.service.impl;
+package com.sunms.service.userService.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sunms.dao.userDao.UserDao;
 import com.sunms.domain.User;
-import com.sunms.service.user.service.UserService;
+import com.sunms.service.userService.UserService;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
