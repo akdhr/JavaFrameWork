@@ -19,14 +19,7 @@
 		<property name="password" value="${jdbc_password}" />
 	</bean>
 
-	<!-- <bean id="dataSource" name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 
-		<property name="url" value="${jdbc_url}" /> <property name="url" value="jdbc:mysql://127.0.0.1:3306/javaframework"></property> 
-		<property name="username" value="${jdbc_username}" /> <property name="password" value="${jdbc_password}" /> <property name="initialSize" 
-		value="0" /> <property name="maxActive" value="20" /> <property name="maxIdle" value="20" /> <property name="minIdle" value="0" 
-		/> <property name="maxWait" value="60000" /> <property name="testOnBorrow" value="false" /> <property name="testOnReturn" 
-		value="false" /> <property name="testWhileIdle" value="true" /> <property name="timeBetweenEvictionRunsMillis" value="60000" 
-		/> <property name="minEvictableIdleTimeMillis" value="25200000" /> <property name="removeAbandoned" value="true" /> <property 
-		name="removeAbandonedTimeout" value="1800" /> <property name="logAbandoned" value="true" /> </bean> -->
+
 	<!-- sqlSessionFactory由mybatis-spring包提供 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" /><!-- 必须指定的属性 -->
@@ -39,16 +32,18 @@
 	<!-- 配置好数据源之后 最重要的就是怎么获取sqlSesseion对象或者说获得mapper对象了(如果没有mybatis或相关持久层框架基础的话，请自行补习) -->
 	<!-- mybatis-spring包提供了三种或者说两种方式供你选择 一种是MapperFactoryBean(有两种配置方式 这里只说明自动扫描的情况 因为在实际项目中那么多mapper文件一个一个的注册 真是没有什么意思 要把精力集中在核心业务上面 
 		而不是这些杂七杂八的配置上面) 一种是SqlSessionTemplate -->
-	<!-- org.mybatis.spring.mapper.MapperScannerConfigurer方式    也就是直接用获取到的mapper对象操作  -->
+	<!-- org.mybatis.spring.mapper.MapperScannerConfigurer方式 也就是直接用获取到的mapper对象操作 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.sunms.dao" /><!-- 必须要指定。这里需要注意，dao包下面的各种dao文件是些interface接口，他是怎么找到对应的mapper文件的呢， 
 			其实很简单。第一种情况就是你配置好，谁匹配谁。这样的话哪怕接口叫a.java.映射文件叫b.xml那它也能找到。第二种就是你没告诉他，哪个接口匹配哪个映射文件， 那就要采取默认情况怎么匹配，就是mapper.xml文件的namespace对应dao的全限定类名 
 			当然方法名字也是要对应的了 -->
 		<!-- <property name="sqlSessionFactoryBeanName" ref="sqlSessionFactory" /> --><!-- 约定优与配置 如果你只有一个数据源不需要切换数据源 就不用配置这个选项 默认是sqlSessionFactory -->
 	</bean>
-	<!-- SqlSessionTemplate方式 这样的话要写daoImpl类了 但它是线程安全的，可以被多个Dao同时使用    好像不配置也可以。。。应该是约定优于配置的原因吧-->
-	<!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-       <constructor-arg index="0" ref="sqlSessionFactory" />
-    </bean> -->
-	
+	<!-- SqlSessionTemplate方式 这样的话要写daoImpl类了 但它是线程安全的，可以被多个Dao同时使用 好像不配置也可以。。。应该是约定优于配置的原因吧 -->
+	<!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"> <constructor-arg index="0" ref="sqlSessionFactory" 
+		/> </bean> -->
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
 </beans>
