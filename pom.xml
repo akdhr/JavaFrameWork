@@ -101,7 +101,7 @@
 				<artifactId>tomcat7-maven-plugin</artifactId> <!-- 命令为tomcat7:redeploy -->
 				<version>2.1</version>
 				<configuration>
-					<url>http://localhost:8080/manager/html</url><!-- tomcat7部署管理路径 -->
+					<url>http://localhost:8080/manager/text</url><!-- tomcat7部署管理路径 -->
 					<server>tomcat</server> <!-- 此处的名字必须和setting.xml中配置的ID一致 -->
 					<username>admin</username>
 					<password>admin</password>
