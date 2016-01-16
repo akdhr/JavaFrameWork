@@ -13,11 +13,12 @@ import com.sunms.service.userService.UserService;
 @RequestMapping("/user")
 public class UserController {
 
-	@Autowired
+	@Autowired	
 	private UserService userService;
 
-	@RequestMapping(params = "id")
+	@RequestMapping(value = "/getUser", params = "id")
 	public String displayUser(String id, HashMap<String, Object> param) {
+		System.out.println("fuck");
 		User user = userService.getUser(Integer.valueOf(id));
 		param.put("user", user);
 		return "/user/displayUser";
