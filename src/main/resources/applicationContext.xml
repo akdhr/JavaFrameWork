@@ -27,9 +27,8 @@
 		<property name="mapperLocations" value="classpath*:com/sunms/mappers/**/*.xml" /><!-- mapper文件存放的位置 
 			这样就不用在mybatis配置文件中注册mapper文件了 -->
 		<property name="typeAliasesPackage" value="com.sunms.domain" /> <!-- 给类取别名，默认为非限定类名，就是类名 -->
-		<!-- <property name="configLocation" value="classpath:mybatis_old.xml" /> --><!-- 指定mybatis的配置文件 spring与mybatis整合后可以做到没有mybatis单独的配置文件 -->
+		 <property name="configLocation" value="classpath:mybatis.xml" />
 	</bean>
-
 
 	<!-- 配置好数据源之后 最重要的就是怎么获取sqlSesseion对象或者说获得mapper对象了(如果没有mybatis或相关持久层框架基础的话，请自行补习) -->
 	<!-- mybatis-spring包提供了三种或者说两种方式供你选择 一种是MapperFactoryBean(有两种配置方式 这里只说明自动扫描的情况 因为在实际项目中那么多mapper文件一个一个的注册 
