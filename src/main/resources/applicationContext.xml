@@ -27,7 +27,7 @@
 		<property name="mapperLocations" value="classpath*:com/sunms/mappers/**/*.xml" /><!-- mapper文件存放的位置 
 			这样就不用在mybatis配置文件中注册mapper文件了 -->
 		<property name="typeAliasesPackage" value="com.sunms.domain" /> <!-- 给类取别名，默认为非限定类名，就是类名 -->
-		 <property name="configLocation" value="classpath:mybatis.xml" />
+		<property name="configLocation" value="classpath:mybatis.xml" />
 	</bean>
 
 	<!-- 配置好数据源之后 最重要的就是怎么获取sqlSesseion对象或者说获得mapper对象了(如果没有mybatis或相关持久层框架基础的话，请自行补习) -->

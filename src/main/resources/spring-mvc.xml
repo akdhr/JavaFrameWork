@@ -12,9 +12,20 @@
 	<context:component-scan base-package="com.sunms.mvc" />
 	<mvc:annotation-driven /><!-- 使用springmvc注解 默认应该是开启的 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
 		<property name="prefix" value="/WEB-INF/jsp" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<bean class="com.sunms.interceptor.AuthenticationInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<bean class="com.sunms.interceptor.SessionInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 <!-- 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="utf-8" />
 		<property name="maxUploadSize" value="10240" />
