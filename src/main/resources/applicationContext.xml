@@ -45,7 +45,15 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 
+	<!-- spring提供的mybatis/jdbc事务管理器 -->  <!-- 模拟转账操作 -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
+	
+	<!-- 编程式事务管理  由spring提供的为了简化开发的事务管理器 不常用-->
+	<bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager"></property>
+	</bean>
+	
+	
 </beans>

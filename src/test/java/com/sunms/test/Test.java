@@ -7,6 +7,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.sunms.dao.userDao.UserDao;
 import com.sunms.domain.User;
+import com.sunms.service.accountService.AccountService;
 import com.sunms.service.userService.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,7 +20,10 @@ public class Test {
 	@Autowired
 	private UserDao userDao;
 
-	@org.junit.Test
+	@Autowired
+	private AccountService accountService;
+
+/*	@org.junit.Test
 	public void test() {
 		User user = userService.getUser(1);
 		System.out.println(user);
@@ -30,5 +34,10 @@ public class Test {
 	public void TestSqlSession() {
 		User user = userDao.getUser(1);
 		System.out.println(user);
+	}*/
+
+	@org.junit.Test
+	public void testTransfer() {
+		accountService.transfer("xiaoshuai", "sunms", 200d);
 	}
 }
