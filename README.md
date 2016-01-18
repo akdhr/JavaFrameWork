@@ -8,8 +8,24 @@
 ***
 ### 开发环境搭建
 进入你自己的工作空间，以~/workspace/myeclipse工作空间为例
+
 `git clone https://github.com/xiaoshuai1127/JavaFrameWork`
-将项目作为maven project导入到myeclipse开发环境中> 
+
+将项目作为maven project导入到myeclipse开发环境中
+
+***
+
+### 注意事项
+
+需要设置你自己的数据库连接信息.涉及到文件db.properties的更改
+
+maven web项目发布到tomcat请参考以下链接
+
+[http://my.oschina.net/angel243/blog/178554?fromerr=ishx9wPo](http://my.oschina.net/angel243/blog/178554?fromerr=ishx9wPo)
+
+[http://penghuaiyi.iteye.com/blog/1859763](http://penghuaiyi.iteye.com/blog/1859763)
+
+感谢以上人员的帮助。
 ***
 ### 更新信息
 2016.1.17
