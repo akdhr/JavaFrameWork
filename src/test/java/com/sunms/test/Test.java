@@ -23,6 +23,7 @@ public class Test {
 	@Autowired
 	private AccountService accountService;
 
+	private int a;
 /*	@org.junit.Test
 	public void test() {
 		User user = userService.getUser(1);
@@ -40,4 +41,5 @@ public class Test {
 	public void testTransfer() {
 		accountService.transfer("xiaoshuai", "sunms", 200d);
 	}
+	
 }

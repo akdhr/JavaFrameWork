@@ -21,19 +21,18 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	private AccountDao accountDao;
 
-	@Override
 	public void transfer(final String out, final String in, final Double money) {
 
 		transactionTemplate.execute(new TransactionCallbackWithoutResult() {
 
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
-				java.util.Map<String, Object> outMap = new HashMap<>(2);
+				java.util.Map<String, Object> outMap = new HashMap<String, Object>(2);
 				outMap.put("name", "xiaoshuai");
 				outMap.put("money", 200d);
 				accountDao.outMoney(outMap);
 				 int i = 1 / 0;
-				java.util.Map<String, Object> inMap = new HashMap<>(2);
+				java.util.Map<String, Object> inMap = new HashMap<String, Object>(2);
 				inMap.put("name", "sunms");
 				inMap.put("money", 200d);
 				accountDao.inMoney(inMap);
