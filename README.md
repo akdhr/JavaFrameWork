@@ -9,6 +9,8 @@
 ### 开发环境搭建
 进入你自己的工作空间，以~/workspace/myeclipse工作空间为例
 
+`cd ~/workspace/myeclipse`
+
 `git clone https://github.com/xiaoshuai1127/JavaFrameWork`
 
 将项目作为maven project导入到myeclipse开发环境中
